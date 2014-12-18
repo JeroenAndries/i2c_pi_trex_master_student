@@ -116,7 +116,7 @@ namespace TRexLib{
 
     /*
      * Set the accelero meter values.
-     *
+     *l
      * @accelero AcceleroMeter instance containing the values of the accelero meter
      */
     void StatusDataPacket::setAcceleroMeter(AcceleroMeter accelero){

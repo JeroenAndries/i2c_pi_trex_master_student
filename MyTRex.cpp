@@ -2,14 +2,19 @@
 
  namespace TRexLib{
 
-	MyTRex::MyTRex(I2C* i2c, int i2cAddress){
+	MyTRex::MyTRex(I2C* i2c, int i2cAddress):TRex(i2c, i2cAddress)
+	{
 		
 	}
-	MyTRex:: bool readStatus(StatusDataPacket * status){
-		
+
+	bool MyTRex::readStatus(StatusDataPacket * status)
+	{
+		return false;
 	}
-	MyTRex:: bool writeStatus(StatusDataPacket * status){
-		
+
+	bool MyTRex::writeCommand(CommandDataPacket * status)
+	{
+		return false;
 	}
 
 

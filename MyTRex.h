@@ -4,8 +4,8 @@
 #include "CommandDataPacket.h"
 #include "TRex.h"
 
-#ifndef TREX_H
-#define TREX_H
+#ifndef MYTREX_H
+#define MYTREX_H
 
 namespace TRexLib{
 
@@ -20,7 +20,7 @@ namespace TRexLib{
              *
              * @return true if the read action was successful
              */
-            virtual bool readStatus(StatusDataPacket * status);
+            bool readStatus(StatusDataPacket * status);
 
             /*
              * Write command to the TRex controller.
@@ -29,7 +29,7 @@ namespace TRexLib{
              *
              * @return true if the write action was successful
              */
-            virtual bool writeCommand(CommandDataPacket * command); 
+            bool writeCommand(CommandDataPacket * command); 
 
         protected:
             /* The bus on which the slave is connected. */

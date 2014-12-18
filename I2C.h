@@ -4,8 +4,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#ifndef I2C_HEADER
-#define I2C_HEADER
+#ifndef I2C_H
+#define I2C_H
 
 namespace TRexLib{
 
