@@ -9,7 +9,7 @@
 
 	bool MyTRex::readStatus(StatusDataPacket * status)
 	{
-		return false;
+		return true;
 	}
 
 	bool MyTRex::writeCommand(CommandDataPacket * status)

@@ -45,31 +45,30 @@
         AcceleroMeter ameter;
         Impact impact;
 
-    	setStartByte(*data);
-       	setErrorFlags(*data+1);
+    	setStartByte(*(data+STATUS_START));
+       	setErrorFlags(*(data+STATUS_ERROR));
 
-		memcpy(&d, data+2, sizeof(int));
-        d=d/100.00;
-        setBatteryVoltage((double)d);
+        d=((*(data+STATUS_BATTERY_MSB)<<8)+(*(data+STATUS_BATTERY_LSB)))/100.0;
+        setBatteryVoltage(d);
 
-        memcpy(&d, data+4, sizeof(double));
+        d=(*(data+STATUS_LEFT_MOTOR_CURRENT_MSB)<<8)+(*(data+STATUS_LEFT_MOTOR_CURRENT_LSB));
         setMotorCurrent(LEFT,d);
-        memcpy(&i, data+8, sizeof(int));
+        i=(*(data+STATUS_LEFT_ENCODER_COUNT_MSB)<<8)+(*(data+STATUS_LEFT_ENCODER_COUNT_LSB));
         setEncoderCount(LEFT,i);
 
-        memcpy(&d, data+6, sizeof(double));
+        d=(*(data+STATUS_RIGHT_MOTOR_CURRENT_MSB)<<8)+(*(data+STATUS_RIGHT_MOTOR_CURRENT_LSB));
         setMotorCurrent(RIGHT,d);
-        memcpy(&i, data+10, sizeof(int));
+        i=(*(data+STATUS_RIGHT_ENCODER_COUNT_MSB)<<8)+(*(data+STATUS_RIGHT_ENCODER_COUNT_LSB));
         setEncoderCount(RIGHT,i);
                
-        memcpy(&ameter.x, data+12, sizeof(int));
-        memcpy(&ameter.y, data+14, sizeof(int));
-        memcpy(&ameter.z, data+16, sizeof(int));
+        ameter.x=(*(data+STATUS_ACCELEROMETER_X_MSB)<<8)+(*(data+STATUS_ACCELEROMETER_X_LSB));
+        ameter.y=(*(data+STATUS_ACCELEROMETER_Y_MSB)<<8)+(*(data+STATUS_ACCELEROMETER_Y_LSB));
+        ameter.z=(*(data+STATUS_ACCELEROMETER_Z_MSB)<<8)+(*(data+STATUS_ACCELEROMETER_Z_LSB));
         setAcceleroMeter(ameter);
 
-        memcpy(&impact.x, data+18, sizeof(int));
-        memcpy(&impact.y, data+20, sizeof(int));
-        memcpy(&impact.z, data+22, sizeof(int));
+        impact.x=(*(data+STATUS_IMPACT_X_MSB)<<8)+(*(data+STATUS_IMPACT_X_LSB));
+        impact.y=(*(data+STATUS_IMPACT_Y_MSB)<<8)+(*(data+STATUS_IMPACT_Y_LSB));
+        impact.z=(*(data+STATUS_IMPACT_Z_MSB)<<8)+(*(data+STATUS_IMPACT_Z_LSB));
         setImpact(impact);
     }
 }
