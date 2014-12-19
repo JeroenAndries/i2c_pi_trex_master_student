@@ -1,6 +1,6 @@
 # The compiler
 BINPATH=/home/vinzetron/buildroot-2014.08/output/host/usr/bin/arm-buildroot-linux-uclibcgnueabi-
-CC=$(BINPATH)g++
+CC=g++
 
 # Compiler flags
 CFLAGS  = -Wall

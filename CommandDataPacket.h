@@ -51,6 +51,16 @@ namespace TRexLib{
             virtual void setLowBatteryVoltage(int sensitivity) = 0;
             virtual void setI2CAddress(unsigned char address) = 0;
             virtual void setI2CClockFrequency(ClockFrequency frequency) = 0;
+
+        private:
+            char startbyte;
+            int motorspeed;
+            bool motorbrake;
+            int servoposition;
+            unsigned char amdvibrate;
+            unsigned char impactsens;
+            int lowbatteryvoltage;
+            unsigned char i2cadress;
     };
 }
 

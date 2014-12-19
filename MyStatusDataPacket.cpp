@@ -48,8 +48,9 @@
     	setStartByte(*data);
        	setErrorFlags(*data+1);
 
-		memcpy(&d, data+2, sizeof(double));
-        setBatteryVoltage(d/100.00);
+		memcpy(&d, data+2, sizeof(int));
+        d=d/100.00;
+        setBatteryVoltage((double)d);
 
         memcpy(&d, data+4, sizeof(double));
         setMotorCurrent(LEFT,d);
