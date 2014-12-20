@@ -16,4 +16,9 @@ namespace TRexLib{
         PWMFrequency PWM = PWMF_122HZ;
         return PWM;
     }
+
+    void CommandDataPacket::setPwmFrequency(PWMFrequency freq){
+        PWMFrequency PWM;
+        PWM = freq;
+    }
 }
