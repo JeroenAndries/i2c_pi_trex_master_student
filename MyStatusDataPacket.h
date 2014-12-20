@@ -24,7 +24,6 @@ namespace TRexLib{
     dus de functies kunnen nog eens onafhankelijk gedeclareerd worden in MyCommandDataPacket
     */
         public:
-            string jsonString;
             string toJSON(void);
             void fromJSON(string json);
             void toTRex(char* buffer);
