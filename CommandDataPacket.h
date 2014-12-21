@@ -29,28 +29,28 @@ namespace TRexLib{
 
         /* Getters are only needed internally so we set them protected */
         protected:
-            virtual unsigned char getStartByte(void) = 0;
-            virtual PWMFrequency getPwmFrequency(void) = 0;
-            virtual int getMotorSpeed(Side side) = 0;
-            virtual bool getMotorBrake(Side side) = 0;
-            virtual int getServoPosition(int location) = 0;
-            virtual unsigned char getAcceleroMeterDevibrate(void) = 0;
-            virtual unsigned char getImpactSensitivity(void) = 0;
-            virtual int getLowBatteryVoltage(void) = 0;
-            virtual unsigned char getI2CAddress(void) = 0;
-            virtual ClockFrequency getI2CClockFrequency(void) = 0;
+            unsigned char getStartByte(void);
+            PWMFrequency getPwmFrequency(void);
+            int getMotorSpeed(Side side);
+            bool getMotorBrake(Side side);
+            int getServoPosition(int location);
+            unsigned char getAcceleroMeterDevibrate(void);
+            unsigned char getImpactSensitivity(void);
+            int getLowBatteryVoltage(void);
+            unsigned char getI2CAddress(void);
+            ClockFrequency getI2CClockFrequency(void);
 
         /* Setters need to be accessible by all */
         public:
-            virtual void setStartByte(char start) = 0;
-            virtual void setPwmFrequency(PWMFrequency freq) = 0;
-            virtual void setMotorSpeed(Side side, int speed) = 0;
-            virtual void setMotorBrake(Side side, bool on) = 0;
-            virtual void setServoPosition(int location, int position) = 0;
-            virtual void setAcceleroMeterDevibrate(unsigned char devibrate) = 0;
-            virtual void setLowBatteryVoltage(int sensitivity) = 0;
-            virtual void setI2CAddress(unsigned char address) = 0;
-            virtual void setI2CClockFrequency(ClockFrequency frequency) = 0;
+            void setStartByte(char start);
+            void setPwmFrequency(PWMFrequency freq);
+            void setMotorSpeed(Side side, int speed);
+            void setMotorBrake(Side side, bool on);
+            void setServoPosition(int location, int position);
+            void setAcceleroMeterDevibrate(unsigned char devibrate);
+            void setLowBatteryVoltage(int sensitivity);
+            void setI2CAddress(unsigned char address);
+            void setI2CClockFrequency(ClockFrequency frequency);
 
         private:
             char startbyte;

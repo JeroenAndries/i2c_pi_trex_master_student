@@ -3,14 +3,21 @@
 
  namespace TRexLib{
 
+    /*functie die de JSON-string genereerd*/
     string MyStatusDataPacket::toJSON(void)
-    {
+    {   /*
+        Voorlopige datamembers om toegang te krijgen tot de members
+        van de structs AcceleroMeter en Impact -> (x,y,z)
+        */
         AcceleroMeter ameter;
         ameter=getAcceleroMeter();
         Impact impact;
         impact=getImpact();
-
+        
+        /*Instantiatie van de JsonClass*/
         JsonClass json;
+        /*return string waarin alle json-members worden opgeslagen*/
+        string jsonString;
         jsonString == "{"
         +json.charValue("startbyte",getStartByte()) +","
         +json.charValue("errorflags",getErrorFlags()) +","
@@ -27,6 +34,7 @@
         +json.intValue("Impact z",impact.z) +","
         +"}";
 
+        /*returnwaarde naar main, om zo naar de website verstuurd te worden*/
         return jsonString;
     }
 
@@ -40,36 +48,51 @@
 
     }
 
+    /*functie die data(byte-sequentie) van de TRex krijgt*/
     void MyStatusDataPacket::fromTRex(char * data)
     {
+        /*
+        Voorlopige datamembers om toegang te krijgen tot:
+        -double en int waarden bestaande uit beiden twee bytes
+        -de members van de structs AcceleroMeter en Impact -> (x,y,z)
+        */
+        double d;
+        int i;
         AcceleroMeter ameter;
         Impact impact;
+        
+        /*Startbyte en errorflags elk bestaande uit één byte*/
+    	setStartByte(*(data+STATUS_START));
+       	setErrorFlags(*(data+STATUS_ERROR));
 
-    	setStartByte(*data);
-       	setErrorFlags(*data+1);
+        /*
+        Alle andere double en int waarden bestaand uit twee bytes
+        Om de correcte plaats van de MSB en LSB te garanderen wordt eerst de MSB gekopieerd
+        en acht bit verschoven, waarna de LSB terug gekopieerd wordt.
+        Dit om te voorkomen dat een andere processor met een andere indiannes anders zou reageren 
+        op een memcpy... (Big-Indian->MSB op de eerste plaats / Little-Indian->LSB op de eerste plaats)
+        */
+        d=((*(data+STATUS_BATTERY_MSB)<<8)+(*(data+STATUS_BATTERY_LSB)))/100.0;
+        setBatteryVoltage(d);
 
-		memcpy(&d, data+2, sizeof(int));
-        d=d/100.00;
-        setBatteryVoltage((double)d);
-
-        memcpy(&d, data+4, sizeof(double));
+        d=(*(data+STATUS_LEFT_MOTOR_CURRENT_MSB)<<8)+(*(data+STATUS_LEFT_MOTOR_CURRENT_LSB));
         setMotorCurrent(LEFT,d);
-        memcpy(&i, data+8, sizeof(int));
+        i=(*(data+STATUS_LEFT_ENCODER_COUNT_MSB)<<8)+(*(data+STATUS_LEFT_ENCODER_COUNT_LSB));
         setEncoderCount(LEFT,i);
 
-        memcpy(&d, data+6, sizeof(double));
+        d=(*(data+STATUS_RIGHT_MOTOR_CURRENT_MSB)<<8)+(*(data+STATUS_RIGHT_MOTOR_CURRENT_LSB));
         setMotorCurrent(RIGHT,d);
-        memcpy(&i, data+10, sizeof(int));
+        i=(*(data+STATUS_RIGHT_ENCODER_COUNT_MSB)<<8)+(*(data+STATUS_RIGHT_ENCODER_COUNT_LSB));
         setEncoderCount(RIGHT,i);
                
-        memcpy(&ameter.x, data+12, sizeof(int));
-        memcpy(&ameter.y, data+14, sizeof(int));
-        memcpy(&ameter.z, data+16, sizeof(int));
+        ameter.x=(*(data+STATUS_ACCELEROMETER_X_MSB)<<8)+(*(data+STATUS_ACCELEROMETER_X_LSB));
+        ameter.y=(*(data+STATUS_ACCELEROMETER_Y_MSB)<<8)+(*(data+STATUS_ACCELEROMETER_Y_LSB));
+        ameter.z=(*(data+STATUS_ACCELEROMETER_Z_MSB)<<8)+(*(data+STATUS_ACCELEROMETER_Z_LSB));
         setAcceleroMeter(ameter);
 
-        memcpy(&impact.x, data+18, sizeof(int));
-        memcpy(&impact.y, data+20, sizeof(int));
-        memcpy(&impact.z, data+22, sizeof(int));
+        impact.x=(*(data+STATUS_IMPACT_X_MSB)<<8)+(*(data+STATUS_IMPACT_X_LSB));
+        impact.y=(*(data+STATUS_IMPACT_Y_MSB)<<8)+(*(data+STATUS_IMPACT_Y_LSB));
+        impact.z=(*(data+STATUS_IMPACT_Z_MSB)<<8)+(*(data+STATUS_IMPACT_Z_LSB));
         setImpact(impact);
     }
 }
