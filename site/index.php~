@@ -292,7 +292,7 @@ $(document).ready(function () {
     <script type="text/javascript" src="assets/js/admin.js"></script>
     <?php console.log("start"); ?>
     <script type="text/javascript">
-    // Deze code zorgt er voor dat er data kan doorgegeven worden aan de site zonder de pagina te herladen.
+    // Deze code zorgt er voor dat er data kan doorgegeven worden aan de site zonder de pagina te herladen
       	$.ajax({
 	  		type: "POST",
 	  		url: "client.php",
