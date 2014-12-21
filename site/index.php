@@ -1,5 +1,9 @@
+<!--Dit is een template 
+	in deze pagina is er enkel een ajax gedeelte toegevoegd.
+	Overbodige zaken zijn gewist  -->
 <!doctype html>
 <html><head>
+
     <meta charset="utf-8">
     <title>BLOCKS - Bootstrap Dashboard Theme</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -288,6 +292,7 @@ $(document).ready(function () {
     <script type="text/javascript" src="assets/js/admin.js"></script>
     <?php console.log("start"); ?>
     <script type="text/javascript">
+    // Deze code zorgt er voor dat er data kan doorgegeven worden aan de site zonder de pagina te herladen
       	$.ajax({
 	  		type: "POST",
 	  		url: "client.php",
