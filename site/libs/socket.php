@@ -1,7 +1,7 @@
 <?php 
 
 class Client
-{
+{	//aanmaken van variabelene en deze declareren indien mogelijk
 	private $socket;
 	private $host = "10.180.35.115";
 	private $port = "9999";
